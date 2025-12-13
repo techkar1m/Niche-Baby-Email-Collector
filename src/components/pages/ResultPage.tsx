@@ -8,7 +8,7 @@ export default function ResultPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#b3e5fc]">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-pastel-yellow via-background to-pastel-green">
       <Header />
       
       <motion.main 
@@ -16,41 +16,36 @@ export default function ResultPage() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1, transition: { duration: 0.8 } }}
       >
-        <div className="w-full max-w-3xl">
-          {/* Top section with heading and image */}
-          <div className="flex flex-col items-center gap-8 md:gap-12 mb-12">
-            <motion.h1 
-              className="text-5xl md:text-6xl font-heading text-[#1a3a4a] text-center leading-tight"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0, transition: { delay: 0.2, duration: 0.6 } }}
-            >
-              Here's Your<br />Niche Baby!
-            </motion.h1>
-            
-            <motion.div 
-              className="flex justify-center"
-              initial={{ opacity: 0, scale: 0.7 }}
-              animate={{ opacity: 1, scale: 1, transition: { delay: 0.4, duration: 0.8, type: "spring", stiffness: 100 } }}
-            >
-              <div className="bg-[#1a3a4a] rounded-3xl p-6 md:p-8 shadow-2xl">
-                <div className="bg-white rounded-2xl p-4 md:p-6">
-                  <video 
-                    src="https://video.wixstatic.com/video/875e57_5e42ab11e3584c5a932fec5771fa2883/file"
-                    width={500}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-auto rounded-lg"
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </div>
+        <div className="w-full max-w-2xl flex flex-col items-center gap-8">
+          {/* Heading */}
+          <motion.h1 
+            className="text-5xl md:text-6xl font-heading text-foreground text-center leading-tight"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0, transition: { delay: 0.2, duration: 0.6 } }}
+          >
+            Here's Your<br />Niche Baby!
+          </motion.h1>
+          
+          {/* Vertical Video */}
+          <motion.div 
+            className="flex justify-center w-full"
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1, transition: { delay: 0.4, duration: 0.8, type: "spring", stiffness: 100 } }}
+          >
+            <div className="w-full max-w-sm">
+              <video 
+                src="https://video.wixstatic.com/video/875e57_5e42ab11e3584c5a932fec5771fa2883/file"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-auto rounded-2xl shadow-lg"
+              />
+            </div>
+          </motion.div>
 
-          {/* Bottom yellow section with button */}
+          {/* Button */}
           <motion.div
-            className="bg-pastel-yellow rounded-3xl p-8 md:p-12 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.6 } }}
           >
