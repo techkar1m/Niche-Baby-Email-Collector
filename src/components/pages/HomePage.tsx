@@ -26,16 +26,16 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
-        <div className="w-full max-w-2xl">
-          {/* Heading with Icon */}
-          <div className="flex items-center gap-3 sm:gap-4 md:gap-6 mb-4 sm:mb-6">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading text-foreground leading-tight">
+        <div className="w-full max-w-3xl">
+          {/* Heading with Icon - Side by Side */}
+          <div className="flex items-center gap-4 sm:gap-5 md:gap-6 mb-6 sm:mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading text-foreground leading-tight whitespace-nowrap">
               Get Your Niche Baby
             </h1>
             <Image
               src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
-              width={60}
-              className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain flex-shrink-0"
+              width={80}
+              className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain flex-shrink-0"
               originWidth={320}
               originHeight={323}
               focalPointX={65.78125}
