@@ -8,6 +8,9 @@ export default function Header() {
           Niche Baby
         </Link>
         <div className="flex gap-6">
+          <Link to="/" className="text-base font-paragraph text-foreground hover:text-primary transition-colors">
+            Home
+          </Link>
         </div>
       </nav>
     </header>
