@@ -16,7 +16,7 @@ export default function ResultPage() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1, transition: { duration: 0.8 } }}
       >
-        <div className="w-full max-w-2xl flex flex-col items-center gap-8">
+        <div className="w-full max-w-5xl flex flex-col items-center gap-8">
           {/* Heading */}
           <motion.h1 
             className="text-5xl md:text-6xl font-heading text-foreground text-center leading-tight"
@@ -32,7 +32,7 @@ export default function ResultPage() {
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1, transition: { delay: 0.4, duration: 0.8, type: "spring", stiffness: 100 } }}
           >
-            <div className="w-full max-w-lg aspect-video md:aspect-auto md:h-[600px] border-8 border-slate-900 rounded-[48px] p-0 shadow-2xl">
+            <div className="w-full max-w-3xl aspect-video md:aspect-auto md:h-[600px] border-8 border-slate-900 rounded-[48px] p-0 shadow-2xl">
               <video 
                 src="https://video.wixstatic.com/video/875e57_5e42ab11e3584c5a932fec5771fa2883/file"
                 autoPlay
