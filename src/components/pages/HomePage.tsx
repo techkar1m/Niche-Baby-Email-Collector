@@ -26,31 +26,33 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
-        <div className="w-full max-w-4xl text-center">
-          <div className="flex flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 mb-6 sm:mb-8">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-foreground leading-tight">
-              Get Your Niche Baby
-            </h1>
-            <Image
-              src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
-              width={100}
-              className="w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-48 lg:h-48 object-contain flex-shrink-0"
-              originWidth={320}
-              originHeight={323}
-              focalPointX={65.78125}
-              focalPointY={101.08359133126935}
-              alt="Baby icon"
-            />
+        <div className="w-full max-w-4xl">
+          <div className="flex flex-col items-start justify-start gap-3 sm:gap-4 md:gap-5 mb-4 sm:mb-5">
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading text-foreground leading-tight">
+                Get Your Niche Baby
+              </h1>
+              <Image
+                src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
+                width={40}
+                className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 object-contain flex-shrink-0"
+                originWidth={320}
+                originHeight={323}
+                focalPointX={65.78125}
+                focalPointY={101.08359133126935}
+                alt="Baby icon"
+              />
+            </div>
           </div>
 
-          <p className="text-xs sm:text-sm md:text-base font-paragraph text-foreground mb-8 sm:mb-10">
+          <p className="text-xs sm:text-sm md:text-base font-paragraph text-foreground mb-6 sm:mb-8">
             Sign up to receive an exclusive animated meme
           </p>
 
-          <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto px-4 sm:px-0">
-            <div className="bg-[rgba(0,0,0,0.7)] rounded-2xl p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
+          <form onSubmit={handleSubmit} className="w-full">
+            <div className="space-y-2 sm:space-y-3">
               <div className="text-left">
-                <label htmlFor="email" className="text-xs sm:text-sm font-paragraph text-white mb-2 block">
+                <label htmlFor="email" className="text-xs sm:text-sm font-paragraph text-foreground mb-1 block">
                   Email Address
                 </label>
                 <Input
