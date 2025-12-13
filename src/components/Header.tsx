@@ -11,9 +11,6 @@ export default function Header() {
           <Link to="/" className="text-base font-paragraph text-foreground hover:text-primary transition-colors">
             Home
           </Link>
-          <Link to="/result" className="text-base font-paragraph text-foreground hover:text-primary transition-colors">
-            Result
-          </Link>
         </div>
       </nav>
     </header>
