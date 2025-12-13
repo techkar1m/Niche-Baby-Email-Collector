@@ -22,19 +22,19 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-pastel-yellow via-background to-pastel-green">
       <Header />
       <motion.main 
-        className="flex-1 flex items-center justify-center px-8 py-12"
+        className="flex-1 flex items-center justify-center px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
         <div className="w-full max-w-4xl text-center">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mb-8">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-heading text-foreground leading-tight">
+          <div className="flex flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 mb-6 sm:mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-foreground leading-tight">
               Get Your Niche Baby
             </h1>
             <Image
               src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
-              width={120}
-              className="w-24 h-24 md:w-36 md:h-36 lg:w-48 lg:h-48 object-contain flex-shrink-0"
+              width={100}
+              className="w-20 h-20 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-48 lg:h-48 object-contain flex-shrink-0"
               originWidth={320}
               originHeight={323}
               focalPointX={65.78125}
@@ -43,14 +43,14 @@ export default function HomePage() {
             />
           </div>
 
-          <p className="text-sm md:text-base font-paragraph text-foreground mb-10">
+          <p className="text-xs sm:text-sm md:text-base font-paragraph text-foreground mb-8 sm:mb-10">
             Sign up to receive an exclusive animated meme
           </p>
 
-          <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
-            <div className="bg-[rgba(0,0,0,0.7)] rounded-2xl p-6 space-y-4">
+          <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto px-4 sm:px-0">
+            <div className="bg-[rgba(0,0,0,0.7)] rounded-2xl p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
               <div className="text-left">
-                <label htmlFor="email" className="text-xs md:text-sm font-paragraph text-white mb-2 block">
+                <label htmlFor="email" className="text-xs sm:text-sm font-paragraph text-white mb-2 block">
                   Email Address
                 </label>
                 <Input
@@ -60,13 +60,13 @@ export default function HomePage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full bg-white text-foreground border-0 rounded-lg h-11 text-sm"
+                  className="w-full bg-white text-foreground border-0 rounded-lg h-10 sm:h-11 text-sm"
                 />
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-pastel-yellow hover:bg-pastel-yellow/90 text-foreground font-heading text-base h-11 rounded-lg"
+                className="w-full bg-pastel-yellow hover:bg-pastel-yellow/90 text-foreground font-heading text-sm sm:text-base h-10 sm:h-11 rounded-lg"
               >
                 Get My Niche Baby
               </Button>
