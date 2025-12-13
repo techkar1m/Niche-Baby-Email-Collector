@@ -65,7 +65,7 @@ export default function HomePage() {
 
               <Button
                 type="submit"
-                className="w-full bg-pastel-yellow hover:bg-pastel-yellow/90 text-foreground font-paragraph text-base h-12 rounded-lg"
+                className="w-full bg-pastel-yellow hover:bg-pastel-yellow/90 text-foreground font-heading text-base h-12 rounded-lg"
               >
                 Get My Niche Baby
               </Button>
