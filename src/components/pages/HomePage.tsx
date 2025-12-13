@@ -28,49 +28,62 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
-        <div className="w-full max-w-md text-center">
-          <h1 className="text-6xl font-heading text-foreground mb-6">
-            Get Your Niche Baby
-          </h1>
-          
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <Image 
-              src="https://static.wixstatic.com/media/900eb8_0a169b3fdb704d4fa657b4ea1458d832~mv2.png"
-              alt="Baby icon"
-              width={40}
-              className="w-10 h-10 object-contain"
-            />
+        <div className="w-full max-w-4xl">
+          <div className="text-center mb-12">
+            <h1 className="text-6xl font-heading text-foreground mb-6">
+              Get Your Niche Baby
+            </h1>
+            
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <Image 
+                src="https://static.wixstatic.com/media/900eb8_0a169b3fdb704d4fa657b4ea1458d832~mv2.png"
+                alt="Baby icon"
+                width={40}
+                className="w-10 h-10 object-contain"
+              />
+            </div>
+
+            <p className="text-base font-paragraph text-foreground mb-8">
+              Sign up to receive an exclusive personalized meme
+            </p>
           </div>
 
-          <p className="text-base font-paragraph text-foreground mb-8">
-            Sign up to receive an exclusive personalized meme
-          </p>
+          <div className="flex items-center justify-center gap-8 flex-wrap lg:flex-nowrap">
+            <form onSubmit={handleSubmit} className="w-full lg:w-auto flex-1 lg:flex-none">
+              <div className="bg-[rgba(0,0,0,0.7)] rounded-xl p-6 space-y-4 max-w-sm">
+                <div className="text-left">
+                  <label htmlFor="email" className="text-sm font-paragraph text-white mb-2 block">
+                    Email Address
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="w-full bg-white text-foreground border-0 rounded-lg h-12"
+                  />
+                </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="bg-[rgba(0,0,0,0.7)] rounded-xl p-6 space-y-4">
-              <div className="text-left">
-                <label htmlFor="email" className="text-sm font-paragraph text-white mb-2 block">
-                  Email Address
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="w-full bg-white text-foreground border-0 rounded-lg h-12"
-                />
+                <Button
+                  type="submit"
+                  className="w-full bg-pastel-yellow hover:bg-pastel-yellow/90 text-foreground font-heading text-base h-12 rounded-lg"
+                >
+                  Get My Niche Baby
+                </Button>
               </div>
+            </form>
 
-              <Button
-                type="submit"
-                className="w-full bg-pastel-yellow hover:bg-pastel-yellow/90 text-foreground font-heading text-base h-12 rounded-lg"
-              >
-                Get My Niche Baby
-              </Button>
+            <div className="flex-shrink-0">
+              <Image 
+                src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
+                alt="Happy baby with folk text"
+                width={280}
+                className="w-64 h-auto object-contain"
+              />
             </div>
-          </form>
+          </div>
         </div>
       </motion.main>
 
