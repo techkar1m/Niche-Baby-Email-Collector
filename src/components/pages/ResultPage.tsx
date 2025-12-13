@@ -32,14 +32,14 @@ export default function ResultPage() {
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1, transition: { delay: 0.4, duration: 0.8, type: "spring", stiffness: 100 } }}
           >
-            <div className="w-full max-w-lg aspect-video md:aspect-auto md:h-[600px] border-8 border-slate-900 rounded-3xl p-0 shadow-2xl">
+            <div className="w-full max-w-lg aspect-video md:aspect-auto md:h-[600px] border-8 border-slate-900 rounded-[48px] p-0 shadow-2xl">
               <video 
                 src="https://video.wixstatic.com/video/875e57_5e42ab11e3584c5a932fec5771fa2883/file"
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full rounded-2xl object-cover"
+                className="w-full h-full rounded-[44px] object-cover"
               />
             </div>
           </motion.div>
