@@ -27,59 +27,53 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
-        <div className="w-full max-w-4xl">
-          <div className="text-center mb-12">
-            <h1 className="text-6xl font-heading text-foreground mb-6">
-              Get Your Niche Baby
-            </h1>
-            
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <Image
-                src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
-                width={40}
-                className="w-10 h-10 object-contain"
-                originWidth={320}
-                originHeight={323}
-                focalPointX={65.78125}
-                focalPointY={101.08359133126935} />
-            </div>
-
-            <p className="text-base font-paragraph text-foreground mb-8">
-              Sign up to receive an exclusive personalized meme
-            </p>
+        <div className="w-full max-w-2xl text-center">
+          <h1 className="text-5xl md:text-6xl font-heading text-foreground mb-4">
+            Get Your Niche Baby
+          </h1>
+          
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <Image
+              src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
+              width={32}
+              className="w-8 h-8 object-contain"
+              originWidth={320}
+              originHeight={323}
+              focalPointX={65.78125}
+              focalPointY={101.08359133126935}
+              alt="Baby icon"
+            />
           </div>
 
-          <div className="flex items-center justify-center gap-8 flex-wrap lg:flex-nowrap">
-            <form onSubmit={handleSubmit} className="w-full lg:w-auto flex-1 lg:flex-none">
-              <div className="bg-[rgba(0,0,0,0.7)] rounded-xl p-6 space-y-4 max-w-sm">
-                <div className="text-left">
-                  <label htmlFor="email" className="text-sm font-paragraph text-white mb-2 block">
-                    Email Address
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="w-full bg-white text-foreground border-0 rounded-lg h-12"
-                  />
-                </div>
+          <p className="text-sm md:text-base font-paragraph text-foreground mb-10">
+            Sign up to receive an exclusive animated meme
+          </p>
 
-                <Button
-                  type="submit"
-                  className="w-full bg-pastel-yellow hover:bg-pastel-yellow/90 text-foreground font-heading text-base h-12 rounded-lg"
-                >
-                  Get My Niche Baby
-                </Button>
+          <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
+            <div className="bg-[rgba(0,0,0,0.7)] rounded-2xl p-6 space-y-4">
+              <div className="text-left">
+                <label htmlFor="email" className="text-xs md:text-sm font-paragraph text-white mb-2 block">
+                  Email Address
+                </label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full bg-white text-foreground border-0 rounded-lg h-11 text-sm"
+                />
               </div>
-            </form>
 
-            <div className="flex-shrink-0">
-
+              <Button
+                type="submit"
+                className="w-full bg-pastel-yellow hover:bg-pastel-yellow/90 text-foreground font-heading text-base h-11 rounded-lg"
+              >
+                Get My Niche Baby
+              </Button>
             </div>
-          </div>
+          </form>
         </div>
       </motion.main>
       <Footer />
