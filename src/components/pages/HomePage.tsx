@@ -9,12 +9,11 @@ import { Image } from '@/components/ui/image';
 
 export default function HomePage() {
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && name) {
+    if (email) {
       navigate('/result');
     }
   };
@@ -50,21 +49,6 @@ export default function HomePage() {
 
           <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
             <div className="bg-[rgba(0,0,0,0.7)] rounded-2xl p-6 space-y-4">
-              <div className="text-left">
-                <label htmlFor="name" className="text-xs md:text-sm font-paragraph text-white mb-2 block">
-                  Name
-                </label>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="Enter your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  className="w-full bg-white text-foreground border-0 rounded-lg h-11 text-sm"
-                />
-              </div>
-
               <div className="text-left">
                 <label htmlFor="email" className="text-xs md:text-sm font-paragraph text-white mb-2 block">
                   Email Address
