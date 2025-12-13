@@ -22,7 +22,6 @@ export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-pastel-yellow via-background to-pastel-green">
       <Header />
-      
       <motion.main 
         className="flex-1 flex items-center justify-center px-8 py-12"
         initial={{ opacity: 0 }}
@@ -35,12 +34,14 @@ export default function HomePage() {
             </h1>
             
             <div className="flex items-center justify-center gap-3 mb-8">
-              <Image 
-                src="https://static.wixstatic.com/media/900eb8_0a169b3fdb704d4fa657b4ea1458d832~mv2.png"
-                alt="Baby icon"
+              <Image
+                src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
                 width={40}
                 className="w-10 h-10 object-contain"
-              />
+                originWidth={320}
+                originHeight={323}
+                focalPointX={65.78125}
+                focalPointY={101.08359133126935} />
             </div>
 
             <p className="text-base font-paragraph text-foreground mb-8">
@@ -76,17 +77,11 @@ export default function HomePage() {
             </form>
 
             <div className="flex-shrink-0">
-              <Image 
-                src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
-                alt="Happy baby with folk text"
-                width={280}
-                className="w-64 h-auto object-contain"
-              />
+
             </div>
           </div>
         </div>
       </motion.main>
-
       <Footer />
     </div>
   );
