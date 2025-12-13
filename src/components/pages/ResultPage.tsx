@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
+import { Image } from '@/components/ui/image';
 
 export default function ResultPage() {
   const navigate = useNavigate();
@@ -32,13 +33,10 @@ export default function ResultPage() {
           >
             <div className="bg-[#1a3a4a] rounded-3xl p-6 md:p-8 shadow-2xl">
               <div className="bg-white rounded-2xl p-4 md:p-6">
-                <video 
-                  src="https://video.wixstatic.com/video/875e57_5e42ab11e3584c5a932fec5771fa2883/file"
+                <Image 
+                  src="https://static.wixstatic.com/media/900eb8_93df63f209044b4cb2ac0023ec0adf50~mv2.png"
+                  alt="Your personalized niche baby meme"
                   width={500}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
                   className="w-full h-auto rounded-lg"
                 />
               </div>
