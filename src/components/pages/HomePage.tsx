@@ -28,15 +28,11 @@ export default function HomePage() {
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
         <div className="w-full max-w-2xl text-center">
-          <h1 className="text-5xl md:text-6xl font-heading text-foreground mb-4">
-            Get Your Niche Baby
-          </h1>
-          
-          <div className="flex items-center justify-center gap-2 mb-6">
+          <div className="flex items-center justify-center mb-8">
             <Image
               src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
-              width={32}
-              className="w-8 h-8 object-contain"
+              width={120}
+              className="w-28 h-28 md:w-32 md:h-32 object-contain"
               originWidth={320}
               originHeight={323}
               focalPointX={65.78125}
@@ -44,6 +40,10 @@ export default function HomePage() {
               alt="Baby icon"
             />
           </div>
+          
+          <h1 className="text-5xl md:text-6xl font-heading text-foreground mb-6">
+            Get Your Niche Baby
+          </h1>
 
           <p className="text-sm md:text-base font-paragraph text-foreground mb-10">
             Sign up to receive an exclusive animated meme
