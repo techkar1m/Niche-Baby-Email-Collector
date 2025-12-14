@@ -36,15 +36,15 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
-        <div className="w-full max-w-3xl">
-          {/* Heading with Icon - Side by Side */}
+        <div className="w-full max-w-md flex flex-col items-center text-center">
+          {/* Heading with Icon - Centered */}
           <motion.div 
             className="mb-8 sm:mb-10 md:mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="flex items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 flex-wrap">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading text-foreground leading-tight">
                 Get Your Niche Baby
               </h1>
@@ -69,7 +69,7 @@ export default function HomePage() {
           {/* Form Container */}
           <motion.form 
             onSubmit={handleSubmit} 
-            className="w-full max-w-md"
+            className="w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
