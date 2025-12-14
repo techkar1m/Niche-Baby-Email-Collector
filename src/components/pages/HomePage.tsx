@@ -27,33 +27,27 @@ export default function HomePage() {
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
         <div className="w-full max-w-3xl">
-          {/* Heading with Icon - Refined Layout */}
+          {/* Heading with Icon - Side by Side */}
           <motion.div 
             className="mb-8 sm:mb-10 md:mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="flex items-start gap-3 sm:gap-4 md:gap-5 lg:gap-6">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading text-foreground leading-tight flex-1">
+            <div className="flex items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading text-foreground leading-tight">
                 Get Your Niche Baby
               </h1>
-              <motion.div
-                className="flex-shrink-0 pt-1 sm:pt-2 md:pt-3"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Image
-                  src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
-                  width={80}
-                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-lg"
-                  originWidth={320}
-                  originHeight={323}
-                  focalPointX={65.78125}
-                  focalPointY={101.08359133126935}
-                  alt="Baby icon"
-                />
-              </motion.div>
+              <Image
+                src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
+                width={80}
+                className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain flex-shrink-0"
+                originWidth={320}
+                originHeight={323}
+                focalPointX={65.78125}
+                focalPointY={101.08359133126935}
+                alt="Baby icon"
+              />
             </div>
           </motion.div>
 
