@@ -44,7 +44,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading text-foreground leading-tight text-center md:text-left">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading text-foreground leading-tight text-center md:text-left">
               Get Your Niche Baby
             </h1>
             <Image
