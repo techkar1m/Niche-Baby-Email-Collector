@@ -37,28 +37,26 @@ export default function HomePage() {
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
         <div className="w-full max-w-md flex flex-col items-center">
-          {/* Heading with Icon - Side by Side */}
+          {/* Heading with Icon - Stacked on Mobile, Side by Side on Desktop */}
           <motion.div 
-            className="mb-6 sm:mb-8 md:mb-10"
+            className="mb-6 sm:mb-8 md:mb-10 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-foreground leading-tight">
-                Get Your Niche Baby
-              </h1>
-              <Image
-                src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
-                width={60}
-                className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain flex-shrink-0"
-                originWidth={320}
-                originHeight={323}
-                focalPointX={65.78125}
-                focalPointY={101.08359133126935}
-                alt="Baby icon"
-              />
-            </div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading text-foreground leading-tight text-center md:text-left">
+              Get Your Niche Baby
+            </h1>
+            <Image
+              src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
+              width={60}
+              className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain flex-shrink-0"
+              originWidth={320}
+              originHeight={323}
+              focalPointX={65.78125}
+              focalPointY={101.08359133126935}
+              alt="Baby icon"
+            />
           </motion.div>
 
           {/* Subtitle */}
