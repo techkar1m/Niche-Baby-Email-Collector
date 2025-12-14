@@ -43,7 +43,7 @@ export default function HomePage() {
       {/* Hidden audio element */}
       <audio 
         ref={audioRef} 
-        src="https://audio.wixstatic.com/mp3/875e57_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6.mp3"
+        src="https://static.wixstatic.com/mp3/900eb8_787b885d9f3247fda85d9c00a0c9a921.mp3"
         preload="auto"
       />
       <Header />
