@@ -26,20 +26,20 @@ export default function ResultPage() {
             Here's Your<br />Niche Baby!
           </motion.h1>
           
-          {/* Vertical Video */}
+          {/* Square Video with Thick Border */}
           <motion.div 
             className="flex justify-center w-full"
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1, transition: { delay: 0.4, duration: 0.8, type: "spring", stiffness: 100 } }}
           >
-            <div className="w-full max-w-lg aspect-[9/16] md:aspect-auto md:h-[600px]">
+            <div className="w-64 h-64 md:w-full md:max-w-lg md:aspect-[9/16] md:h-auto border-8 md:border-0 border-primary rounded-2xl p-0 md:p-0">
               <video 
                 src="https://video.wixstatic.com/video/875e57_5e42ab11e3584c5a932fec5771fa2883/file"
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full rounded-2xl shadow-lg object-cover"
+                className="w-full h-full rounded-lg md:rounded-2xl shadow-lg object-cover"
               />
             </div>
           </motion.div>
