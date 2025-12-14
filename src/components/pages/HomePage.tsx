@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
@@ -11,6 +11,7 @@ export default function HomePage() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -20,6 +21,15 @@ export default function HomePage() {
     e.preventDefault();
     if (email) {
       setIsSubmitting(true);
+      
+      // Play audio if available
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch((error) => {
+          console.log('Audio playback failed:', error);
+        });
+      }
+      
       // Simulate a brief delay for better UX
       setTimeout(() => {
         setIsSubmitting(false);
@@ -30,6 +40,12 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-pastel-yellow via-background to-pastel-green">
+      {/* Hidden audio element */}
+      <audio 
+        ref={audioRef} 
+        src="https://audio.wixstatic.com/mp3/875e57_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6.mp3"
+        preload="auto"
+      />
       <Header />
       <motion.main 
         className="flex-1 flex items-center justify-center px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12"
