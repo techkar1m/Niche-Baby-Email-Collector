@@ -74,7 +74,7 @@ export default function HomePage() {
           >
             <div className="bg-[rgba(0,0,0,0.7)] rounded-2xl p-5 sm:p-6 md:p-7 space-y-4 sm:space-y-5">
               <div className="text-left">
-                <label htmlFor="email" className="text-xs sm:text-sm font-paragraph text-white mb-2 block">
+                <label htmlFor="email" className="text-sm sm:text-base md:text-lg font-paragraph text-white mb-2 block">
                   Email Address
                 </label>
                 <Input
@@ -85,14 +85,14 @@ export default function HomePage() {
                   onChange={handleEmailChange}
                   disabled={isSubmitting}
                   required
-                  className="w-full bg-white text-foreground border-0 rounded-lg h-11 sm:h-12 text-sm"
+                  className="w-full bg-white text-foreground border-0 rounded-lg h-12 sm:h-13 md:h-14 text-base sm:text-lg md:text-lg placeholder:text-base"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-pastel-yellow hover:bg-pastel-yellow/90 text-foreground font-heading text-sm sm:text-base h-11 sm:h-12 rounded-lg"
+                className="w-full bg-pastel-yellow hover:bg-pastel-yellow/90 text-foreground font-heading text-base sm:text-lg md:text-xl h-12 sm:h-13 md:h-14 rounded-lg"
               >
                 {isSubmitting ? (
                   <motion.span
