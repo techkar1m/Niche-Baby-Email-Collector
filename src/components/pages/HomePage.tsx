@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
@@ -6,12 +6,13 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Image } from '@/components/ui/image';
+import { useAudioStore } from '@/store/audioStore';
 
 export default function HomePage() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const playAudio = useAudioStore((state) => state.playAudio);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -22,13 +23,8 @@ export default function HomePage() {
     if (email) {
       setIsSubmitting(true);
       
-      // Play audio if available
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().catch((error) => {
-          console.log('Audio playback failed:', error);
-        });
-      }
+      // Play audio from the shared audio element
+      playAudio();
       
       // Simulate a brief delay for better UX
       setTimeout(() => {
@@ -40,12 +36,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-pastel-yellow via-background to-pastel-green">
-      {/* Hidden audio element */}
-      <audio 
-        ref={audioRef} 
-        src="https://static.wixstatic.com/mp3/900eb8_787b885d9f3247fda85d9c00a0c9a921.mp3"
-        preload="auto"
-      />
       <Header />
       <motion.main 
         className="flex-1 flex items-center justify-center px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12"
