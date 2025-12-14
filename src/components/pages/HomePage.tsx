@@ -36,22 +36,22 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
-        <div className="w-full max-w-md flex flex-col items-center text-center">
-          {/* Heading with Icon - Centered */}
+        <div className="w-full max-w-md flex flex-col items-center">
+          {/* Heading with Icon - Side by Side */}
           <motion.div 
-            className="mb-8 sm:mb-10 md:mb-12"
+            className="mb-6 sm:mb-8 md:mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 flex-wrap">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading text-foreground leading-tight">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-foreground leading-tight">
                 Get Your Niche Baby
               </h1>
               <Image
                 src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
-                width={80}
-                className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain flex-shrink-0"
+                width={60}
+                className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain flex-shrink-0"
                 originWidth={320}
                 originHeight={323}
                 focalPointX={65.78125}
@@ -62,7 +62,7 @@ export default function HomePage() {
           </motion.div>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-base md:text-lg font-paragraph text-foreground mb-8 sm:mb-10">
+          <p className="text-xs sm:text-sm md:text-base font-paragraph text-foreground mb-6 sm:mb-8 text-center">
             Sign up to receive an exclusive animated meme
           </p>
 
