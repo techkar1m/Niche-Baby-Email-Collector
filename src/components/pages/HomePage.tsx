@@ -91,12 +91,12 @@ export default function HomePage() {
             <div className="bg-[rgba(0,0,0,0.7)] rounded-2xl p-5 sm:p-6 md:p-7 space-y-4 sm:space-y-5">
               <div className="text-left">
                 <label htmlFor="email" className="text-sm sm:text-base md:text-lg font-paragraph text-white mb-2 block">
-                  Email Address
+                  Your Email
                 </label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Tell us your email to get started! 🎉"
                   value={email}
                   onChange={handleEmailChange}
                   disabled={isSubmitting}
