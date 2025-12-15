@@ -48,7 +48,7 @@ export default function HomePage() {
       />
       <Header />
       <motion.main 
-        className="flex-1 flex items-center justify-center px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12"
+        className="flex-1 flex items-center justify-center px-4 py-4 sm:py-8 sm:px-6 sm:py-10 md:px-8 md:py-12"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
