@@ -52,21 +52,21 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 1 } }}
       >
-        <div className="w-full max-w-md flex flex-col items-center">
+        <div className="w-full max-w-2xl flex flex-col items-center">
           {/* Heading with Icon - Stacked on Mobile, Side by Side on Desktop */}
           <motion.div 
-            className="mb-6 sm:mb-8 md:mb-10 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4"
+            className="mb-8 sm:mb-10 md:mb-12 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading text-foreground leading-tight text-center md:text-left">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading text-foreground leading-tight text-center md:text-left">
               Get Your Niche Baby
             </h1>
             <Image
               src="https://static.wixstatic.com/media/900eb8_dcc27cfe07b441d3ac855152741962fc~mv2.jpg"
-              width={60}
-              className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain flex-shrink-0"
+              width={80}
+              className="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain flex-shrink-0"
               originWidth={320}
               originHeight={323}
               focalPointX={65.78125}
