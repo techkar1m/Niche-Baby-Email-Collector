@@ -32,7 +32,7 @@ export default function ResultPage() {
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1, transition: { delay: 0.4, duration: 0.8, type: "spring", stiffness: 100 } }}
           >
-            <div className="w-64 h-64 md:w-full md:max-w-lg md:aspect-[9/16] md:h-auto border-8 md:border-0 border-primary rounded-2xl p-0 md:p-0">
+            <div className="w-80 h-80 md:w-full md:max-w-lg md:aspect-[9/16] md:h-auto border-8 md:border-0 border-primary rounded-2xl p-0 md:p-0">
               <video 
                 src="https://video.wixstatic.com/video/875e57_5e42ab11e3584c5a932fec5771fa2883/file"
                 autoPlay
