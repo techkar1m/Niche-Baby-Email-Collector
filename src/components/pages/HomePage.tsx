@@ -96,7 +96,7 @@ export default function HomePage() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Tell us your email to get started! 🎉"
+                  placeholder="Enter your email"
                   value={email}
                   onChange={handleEmailChange}
                   disabled={isSubmitting}
