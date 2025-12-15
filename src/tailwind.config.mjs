@@ -20,7 +20,8 @@ export default {
             },
             fontFamily: {
                 heading: "roboto-bold",
-                paragraph: "roboto"
+                paragraph: "roboto",
+                playful: "'Comic Sans MS', 'Trebuchet MS', cursive, sans-serif"
             },
             colors: {
                 'pastel-yellow': '#FFFFE0',
