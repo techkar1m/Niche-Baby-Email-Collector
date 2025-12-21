@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
-import { createWixContact } from '@/integrations/contacts';
+import { upsertWixContact } from '@/integrations/contacts/service';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -23,50 +23,68 @@ export default function HomePage() {
     try {
       const subscriberId = crypto.randomUUID();
       
-      // Create a new subscriber in the subscribers collection
+      // Step 1: Create a new subscriber in the subscribers collection
+      console.log('📝 Creating subscriber in database...', { email: data.email });
       await BaseCrudService.create('subscribers', {
         _id: subscriberId,
         email: data.email,
         subscriptionDate: new Date().toISOString(),
         isActive: true,
       });
+      console.log('✅ Subscriber created successfully in database');
       
-      // Create a contact in Wix Contacts
+      // Step 2: Create or update contact in Wix Contacts
+      console.log('👤 Creating/updating contact in Wix Contacts...', { email: data.email });
       try {
-        const contactResult = await createWixContact(data.email);
-        console.log('Contact created successfully:', contactResult);
+        const contactResult = await upsertWixContact(data.email);
+        console.log('✅ Contact successfully created/updated in Wix Contacts:', {
+          contactId: contactResult?.id,
+          email: data.email,
+        });
       } catch (contactError) {
-        console.error('Error creating contact in Wix:', contactError);
+        console.error('⚠️ Error creating contact in Wix Contacts:', {
+          email: data.email,
+          error: contactError instanceof Error ? contactError.message : String(contactError),
+        });
         // Continue even if contact creation fails - the subscriber is still in the database
       }
       
-      // Send email notification to notkareemanani@gmail.com
-      await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          subscriberEmail: data.email,
-          recipientEmail: 'notkareemanani@gmail.com',
-        }),
-      });
+      // Step 3: Send email notification to notkareemanani@gmail.com
+      console.log('📧 Sending email notification...');
+      try {
+        await fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            subscriberEmail: data.email,
+            recipientEmail: 'notkareemanani@gmail.com',
+          }),
+        });
+        console.log('✅ Email notification sent');
+      } catch (emailError) {
+        console.error('⚠️ Error sending email:', emailError);
+      }
       
-      // Play audio if available
+      // Step 4: Play audio if available
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
         audioRef.current.play().catch((error) => {
-          console.log('Audio playback failed:', error);
+          console.log('⚠️ Audio playback failed:', error);
         });
       }
       
-      // Clear form and navigate to result page
+      // Step 5: Clear form and navigate to result page
       reset();
       setTimeout(() => {
         navigate('/result');
       }, 500);
     } catch (err) {
-      console.error('Subscription error:', err);
+      console.error('❌ Subscription error:', {
+        error: err instanceof Error ? err.message : String(err),
+        timestamp: new Date().toISOString(),
+      });
     }
   };
 
