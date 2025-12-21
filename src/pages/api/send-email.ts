@@ -12,11 +12,7 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Generate a unique contact ID for tracking
-    const contactId = `contact_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
-    
     console.log('Subscriber notification prepared:', {
-      contactId,
       email: subscriberEmail,
       timestamp: new Date().toISOString(),
     });
@@ -38,9 +34,6 @@ export const POST: APIRoute = async ({ request }) => {
             
             <p style="color: #666; margin: 15px 0 5px 0;"><strong>Subscription Date:</strong></p>
             <p style="color: #000; margin: 5px 0;">${new Date().toLocaleString()}</p>
-            
-            ${contactId ? `<p style="color: #666; margin: 15px 0 5px 0;"><strong>Wix Contact ID:</strong></p>
-            <p style="color: #000; margin: 5px 0; font-family: monospace;">${contactId}</p>` : ''}
           </div>
           
           <div style="text-align: center; color: #999; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
@@ -55,7 +48,6 @@ A new subscriber has joined your Niche Baby community!
 
 Subscriber Email: ${subscriberEmail}
 Subscription Date: ${new Date().toLocaleString()}
-${contactId ? `Wix Contact ID: ${contactId}` : ''}
 
 This is an automated notification from Niche Baby.
       `,
@@ -68,7 +60,6 @@ This is an automated notification from Niche Baby.
         success: true, 
         message: 'Subscriber notification prepared',
         subscriberEmail: subscriberEmail,
-        contactId: contactId,
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
