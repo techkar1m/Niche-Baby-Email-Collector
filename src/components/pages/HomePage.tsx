@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useMember } from '@/integrations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -10,17 +11,29 @@ import { Image } from '@/components/ui/image';
 export default function HomePage() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const audioRef = useRef<HTMLAudioElement>(null);
+  const { actions } = useMember();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+    setError('');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setIsSubmitting(true);
+    if (!email) {
+      setError('Please enter a valid email');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setError('');
+    
+    try {
+      // Trigger member login flow
+      actions.login();
       
       // Play audio if available
       if (audioRef.current) {
@@ -30,14 +43,16 @@ export default function HomePage() {
         });
       }
       
-      // Store email for future use (e.g., send to backend or analytics)
-      console.log('Email submitted:', email);
-      
-      // Navigate to result page
+      // Clear email and navigate to result page
+      setEmail('');
       setTimeout(() => {
         setIsSubmitting(false);
         navigate('/result');
       }, 500);
+    } catch (err) {
+      setIsSubmitting(false);
+      setError('Failed to sign in. Please try again.');
+      console.error('Member login error:', err);
     }
   };
 
@@ -107,6 +122,12 @@ export default function HomePage() {
                   className="w-full bg-white text-foreground border-0 rounded-lg h-12 sm:h-13 md:h-14 text-lg sm:text-lg md:text-lg placeholder:text-lg font-playful"
                 />
               </div>
+
+              {error && (
+                <p className="text-destructive text-sm font-paragraph">
+                  {error}
+                </p>
+              )}
 
               <Button
                 type="submit"
