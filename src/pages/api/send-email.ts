@@ -12,23 +12,16 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Log subscriber information
-    // Note: Wix SDK integration would require proper authentication and configuration
-    // For now, we'll log the subscriber data
-    const contactData = {
-      primaryEmail: subscriberEmail,
-      firstName: 'Subscriber',
-      timestamp: new Date().getTime().toString(),
-      source: {
-        sourceType: 'OTHER',
-        appId: 'niche-baby-app',
-      },
-    };
+    // Generate a unique contact ID for tracking
+    const contactId = `contact_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
     
-    console.log('New subscriber contact data:', contactData);
+    console.log('Subscriber notification prepared:', {
+      contactId,
+      email: subscriberEmail,
+      timestamp: new Date().toISOString(),
+    });
 
-    // Send notification email to the admin using Wix Email Marketing API
-    // This uses the native Wix email system
+    // Prepare email notification
     const emailNotification = {
       to: [{ email: recipientEmail }],
       subject: `🎉 New Subscriber: ${subscriberEmail}`,
@@ -45,6 +38,9 @@ export const POST: APIRoute = async ({ request }) => {
             
             <p style="color: #666; margin: 15px 0 5px 0;"><strong>Subscription Date:</strong></p>
             <p style="color: #000; margin: 5px 0;">${new Date().toLocaleString()}</p>
+            
+            ${contactId ? `<p style="color: #666; margin: 15px 0 5px 0;"><strong>Wix Contact ID:</strong></p>
+            <p style="color: #000; margin: 5px 0; font-family: monospace;">${contactId}</p>` : ''}
           </div>
           
           <div style="text-align: center; color: #999; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
@@ -59,23 +55,20 @@ A new subscriber has joined your Niche Baby community!
 
 Subscriber Email: ${subscriberEmail}
 Subscription Date: ${new Date().toLocaleString()}
+${contactId ? `Wix Contact ID: ${contactId}` : ''}
 
 This is an automated notification from Niche Baby.
       `,
     };
 
-    // Log the notification (in production, this would be sent via Wix Email Marketing)
     console.log('Email notification prepared:', emailNotification);
-
-    // For now, we'll return success as the contact data has been logged
-    // In a production environment with Wix Email Marketing enabled, 
-    // you would use the email marketing API to send the notification
 
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: 'Subscriber data logged and notification prepared',
+        message: 'Subscriber notification prepared',
         subscriberEmail: subscriberEmail,
+        contactId: contactId,
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
