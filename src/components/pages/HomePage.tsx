@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useMember } from '@/integrations';
+import { BaseCrudService } from '@/integrations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -14,7 +14,6 @@ export default function HomePage() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { actions } = useMember();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -32,8 +31,13 @@ export default function HomePage() {
     setError('');
     
     try {
-      // Trigger member login flow
-      actions.login();
+      // Create a new subscriber in the subscribers collection
+      await BaseCrudService.create('subscribers', {
+        _id: crypto.randomUUID(),
+        email: email,
+        subscriptionDate: new Date().toISOString(),
+        isActive: true,
+      });
       
       // Play audio if available
       if (audioRef.current) {
@@ -51,8 +55,8 @@ export default function HomePage() {
       }, 500);
     } catch (err) {
       setIsSubmitting(false);
-      setError('Failed to sign in. Please try again.');
-      console.error('Member login error:', err);
+      setError('Failed to subscribe. Please try again.');
+      console.error('Subscription error:', err);
     }
   };
 
