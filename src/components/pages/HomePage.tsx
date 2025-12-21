@@ -20,9 +20,11 @@ export default function HomePage() {
 
   const onSubmit = async (data: { email: string }) => {
     try {
+      const subscriberId = crypto.randomUUID();
+      
       // Create a new subscriber in the subscribers collection
       await BaseCrudService.create('subscribers', {
-        _id: crypto.randomUUID(),
+        _id: subscriberId,
         email: data.email,
         subscriptionDate: new Date().toISOString(),
         isActive: true,
