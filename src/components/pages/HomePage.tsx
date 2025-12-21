@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
 import Header from '@/components/Header';
@@ -9,32 +10,20 @@ import { Input } from '@/components/ui/input';
 import { Image } from '@/components/ui/image';
 
 export default function HomePage() {
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
   const audioRef = useRef<HTMLAudioElement>(null);
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
+    defaultValues: {
+      email: '',
+    },
+  });
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    setError('');
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) {
-      setError('Please enter a valid email');
-      return;
-    }
-
-    setIsSubmitting(true);
-    setError('');
-    
+  const onSubmit = async (data: { email: string }) => {
     try {
       // Create a new subscriber in the subscribers collection
       await BaseCrudService.create('subscribers', {
         _id: crypto.randomUUID(),
-        email: email,
+        email: data.email,
         subscriptionDate: new Date().toISOString(),
         isActive: true,
       });
@@ -47,15 +36,12 @@ export default function HomePage() {
         });
       }
       
-      // Clear email and navigate to result page
-      setEmail('');
+      // Clear form and navigate to result page
+      reset();
       setTimeout(() => {
-        setIsSubmitting(false);
         navigate('/result');
       }, 500);
     } catch (err) {
-      setIsSubmitting(false);
-      setError('Failed to subscribe. Please try again.');
       console.error('Subscription error:', err);
     }
   };
@@ -104,7 +90,7 @@ export default function HomePage() {
 
           {/* Form Container */}
           <motion.form 
-            onSubmit={handleSubmit} 
+            onSubmit={handleSubmit(onSubmit)} 
             className="w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -119,17 +105,21 @@ export default function HomePage() {
                   id="email"
                   type="email"
                   placeholder="Enter your email"
-                  value={email}
-                  onChange={handleEmailChange}
                   disabled={isSubmitting}
-                  required
                   className="w-full bg-white text-foreground border-0 rounded-lg h-12 sm:h-13 md:h-14 text-lg sm:text-lg md:text-lg placeholder:text-lg font-playful"
+                  {...register('email', {
+                    required: 'Please enter a valid email',
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: 'Invalid email address',
+                    },
+                  })}
                 />
               </div>
 
-              {error && (
+              {errors.email && (
                 <p className="text-destructive text-sm font-paragraph">
-                  {error}
+                  {errors.email.message}
                 </p>
               )}
 
