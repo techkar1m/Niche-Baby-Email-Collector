@@ -28,6 +28,18 @@ export default function HomePage() {
         isActive: true,
       });
       
+      // Send email notification to notkareemanani@gmail.com
+      await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          subscriberEmail: data.email,
+          recipientEmail: 'notkareemanani@gmail.com',
+        }),
+      });
+      
       // Play audio if available
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
