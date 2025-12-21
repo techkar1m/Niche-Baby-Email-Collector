@@ -17,7 +17,7 @@ export default function HomePage() {
     setEmail(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
       setIsSubmitting(true);
@@ -30,7 +30,10 @@ export default function HomePage() {
         });
       }
       
-      // Simulate a brief delay for better UX
+      // Store email for future use (e.g., send to backend or analytics)
+      console.log('Email submitted:', email);
+      
+      // Navigate to result page
       setTimeout(() => {
         setIsSubmitting(false);
         navigate('/result');
