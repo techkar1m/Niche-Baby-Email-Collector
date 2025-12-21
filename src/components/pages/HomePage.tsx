@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
+import { createWixContact } from '@/integrations/contacts';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -29,6 +30,15 @@ export default function HomePage() {
         subscriptionDate: new Date().toISOString(),
         isActive: true,
       });
+      
+      // Create a contact in Wix Contacts
+      try {
+        const contactResult = await createWixContact(data.email);
+        console.log('Contact created successfully:', contactResult);
+      } catch (contactError) {
+        console.error('Error creating contact in Wix:', contactError);
+        // Continue even if contact creation fails - the subscriber is still in the database
+      }
       
       // Send email notification to notkareemanani@gmail.com
       await fetch('/api/send-email', {
