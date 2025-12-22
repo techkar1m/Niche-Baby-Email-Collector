@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
-import { upsertWixContact } from '@/integrations/contacts/service';
+import { upsertWixContact } from '@/integrations/contacts';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
