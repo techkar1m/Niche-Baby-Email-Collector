@@ -13,7 +13,7 @@ import { Image } from '@/components/ui/image';
 export default function HomePage() {
   const navigate = useNavigate();
   const audioRef = useRef<HTMLAudioElement>(null);
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset, setError } = useForm({
     defaultValues: {
       email: '',
     },
@@ -21,6 +21,18 @@ export default function HomePage() {
 
   const onSubmit = async (data: { email: string }) => {
     try {
+      // Step 0: Check if email already exists
+      console.log('🔍 Checking if email already exists...', { email: data.email });
+      const { items: existingSubscribers } = await BaseCrudService.getAll('subscribers');
+      const emailExists = existingSubscribers.some((subscriber) => 
+        subscriber.email?.toLowerCase() === data.email.toLowerCase()
+      );
+      
+      if (emailExists) {
+        console.log('⚠️ Email already registered:', { email: data.email });
+        throw new Error('This email is already registered. Please use a different email.');
+      }
+      
       const subscriberId = crypto.randomUUID();
       
       // Step 1: Create a new subscriber in the subscribers collection
@@ -85,6 +97,14 @@ export default function HomePage() {
         error: err instanceof Error ? err.message : String(err),
         timestamp: new Date().toISOString(),
       });
+      
+      // Set form error for duplicate email
+      if (err instanceof Error && err.message.includes('already registered')) {
+        setError('email', {
+          type: 'manual',
+          message: err.message,
+        });
+      }
     }
   };
 
