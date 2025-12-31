@@ -20,15 +20,24 @@ export default function ResultPage() {
 
   useEffect(() => {
     // Generate celebration particles
-    const newParticles: Particle[] = Array.from({ length: 30 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      delay: Math.random() * 0.5,
-      duration: 2 + Math.random() * 1,
-      size: 8 + Math.random() * 12,
-      color: ['#FFFFE0', '#98FB98', '#FFB6C1', '#87CEEB', '#FFD700'][Math.floor(Math.random() * 5)],
-    }));
-    setParticles(newParticles);
+    const generateParticles = () => {
+      const newParticles: Particle[] = Array.from({ length: 30 }, (_, i) => ({
+        id: Math.random(),
+        left: Math.random() * 100,
+        delay: Math.random() * 0.5,
+        duration: 2 + Math.random() * 1,
+        size: 8 + Math.random() * 12,
+        color: ['#FFFFE0', '#98FB98', '#FFB6C1', '#87CEEB', '#FFD700'][Math.floor(Math.random() * 5)],
+      }));
+      setParticles(newParticles);
+    };
+
+    generateParticles();
+    
+    // Regenerate particles every 3.5 seconds to create continuous loop
+    const interval = setInterval(generateParticles, 3500);
+    
+    return () => clearInterval(interval);
   }, []);
 
   return (
