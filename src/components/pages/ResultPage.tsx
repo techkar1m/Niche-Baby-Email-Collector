@@ -23,7 +23,7 @@ export default function ResultPage() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0, transition: { delay: 0.2, duration: 0.6 } }}
           >
-            Here's Your<br />Niche Baby!
+            Happy NEW year
           </motion.h1>
           
           {/* Square Video with Thick Border */}
