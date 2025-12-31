@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 
 interface Particle {
-  id: number;
+  id: string;
   left: number;
   delay: number;
   duration: number;
@@ -22,7 +22,7 @@ export default function ResultPage() {
     // Generate celebration particles
     const generateParticles = () => {
       const newParticles: Particle[] = Array.from({ length: 30 }, (_, i) => ({
-        id: Math.random(),
+        id: `particle-${Date.now()}-${i}`,
         left: Math.random() * 100,
         delay: Math.random() * 0.5,
         duration: 2 + Math.random() * 1,
