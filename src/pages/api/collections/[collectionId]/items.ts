@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { items } from '@wix/data';
 
 /**
  * API endpoint for collection items
@@ -24,16 +25,16 @@ export const GET: APIRoute = async ({ params, url }) => {
     const refParams = url.searchParams.getAll('ref');
     console.log('📋 Reference fields requested:', refParams);
 
-    // This is a stub endpoint - in a real implementation, this would:
-    // 1. Query the Wix CMS database
-    // 2. Populate reference fields if requested
-    // 3. Return the items
+    // Query the Wix CMS database
+    const query = items.query(collectionId);
     
-    // For now, return empty items array
+    const result = await query.find();
+    const itemsList = result.items || [];
+
     return new Response(
       JSON.stringify({
-        items: [],
-        totalCount: 0,
+        items: itemsList,
+        totalCount: itemsList.length,
       }),
       { 
         status: 200, 
@@ -97,15 +98,18 @@ export const POST: APIRoute = async ({ params, request }) => {
       timestamp: new Date().toISOString(),
     });
 
-    // This is a stub endpoint - in a real implementation, this would:
-    // 1. Validate the item data
-    // 2. Create the item in the Wix CMS database
-    // 3. Return the created item
+    // Create the item in the Wix CMS database
+    const createdItem = await items.insert(collectionId, itemData);
     
-    // For now, return the item as-is
+    console.log('✅ Item created successfully in Wix CMS:', {
+      collectionId,
+      itemId: createdItem._id,
+      timestamp: new Date().toISOString(),
+    });
+
     return new Response(
       JSON.stringify({
-        item: itemData,
+        item: createdItem,
         success: true,
       }),
       { 

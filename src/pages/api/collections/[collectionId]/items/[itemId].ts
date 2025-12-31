@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { items } from '@wix/data';
 
 /**
  * API endpoint for individual collection items
@@ -25,20 +26,32 @@ export const GET: APIRoute = async ({ params, url }) => {
     const refParams = url.searchParams.getAll('ref');
     console.log('📋 Reference fields requested:', refParams);
 
-    // This is a stub endpoint - in a real implementation, this would:
-    // 1. Query the Wix CMS database for the specific item
-    // 2. Populate reference fields if requested
-    // 3. Return the item
+    // Query the Wix CMS database for the specific item
+    const item = await items.get(collectionId, itemId);
     
-    // For now, return a not found error
+    if (!item) {
+      return new Response(
+        JSON.stringify({
+          error: 'Item not found',
+          itemId,
+          collectionId,
+        }),
+        { 
+          status: 404, 
+          headers: { 
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+          } 
+        }
+      );
+    }
+
     return new Response(
       JSON.stringify({
-        error: 'Item not found',
-        itemId,
-        collectionId,
+        item,
       }),
       { 
-        status: 404, 
+        status: 200, 
         headers: { 
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -99,15 +112,18 @@ export const PATCH: APIRoute = async ({ params, request }) => {
       timestamp: new Date().toISOString(),
     });
 
-    // This is a stub endpoint - in a real implementation, this would:
-    // 1. Validate the update data
-    // 2. Update the item in the Wix CMS database
-    // 3. Return the updated item
+    // Update the item in the Wix CMS database
+    const updatedItem = await items.update(collectionId, { ...updateData, _id: itemId });
     
-    // For now, return the updated item
+    console.log('✅ Item updated successfully in Wix CMS:', {
+      collectionId,
+      itemId,
+      timestamp: new Date().toISOString(),
+    });
+
     return new Response(
       JSON.stringify({
-        item: { _id: itemId, ...updateData },
+        item: updatedItem,
         success: true,
       }),
       { 
@@ -153,11 +169,15 @@ export const DELETE: APIRoute = async ({ params }) => {
       timestamp: new Date().toISOString(),
     });
 
-    // This is a stub endpoint - in a real implementation, this would:
-    // 1. Delete the item from the Wix CMS database
-    // 2. Return a success response
+    // Delete the item from the Wix CMS database
+    await items.remove(collectionId, itemId);
     
-    // For now, return a success response
+    console.log('✅ Item deleted successfully from Wix CMS:', {
+      collectionId,
+      itemId,
+      timestamp: new Date().toISOString(),
+    });
+
     return new Response(
       JSON.stringify({
         success: true,
