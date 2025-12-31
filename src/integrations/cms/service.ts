@@ -37,14 +37,33 @@ class BaseCrudServiceClass {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || `Failed to create item in ${collectionId}`);
+        let errorMessage = `Failed to create item in ${collectionId}`;
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          } else {
+            const text = await response.text();
+            console.error('Non-JSON error response:', text);
+            errorMessage = `API error: ${response.status} ${response.statusText}`;
+          }
+        } catch (parseError) {
+          console.error('Failed to parse error response:', parseError);
+          errorMessage = `API error: ${response.status} ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('API returned non-JSON response');
       }
 
       const result = await response.json();
       return result.item || result;
     } catch (error) {
-      console.error(`Error creating item in ${collectionId}:`, error);
+      console.error(`❌ Error creating item in ${collectionId}:`, error);
       throw error;
     }
   }
@@ -78,8 +97,27 @@ class BaseCrudServiceClass {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || `Failed to fetch items from ${collectionId}`);
+        let errorMessage = `Failed to fetch items from ${collectionId}`;
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          } else {
+            const text = await response.text();
+            console.error('Non-JSON error response:', text);
+            errorMessage = `API error: ${response.status} ${response.statusText}`;
+          }
+        } catch (parseError) {
+          console.error('Failed to parse error response:', parseError);
+          errorMessage = `API error: ${response.status} ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('API returned non-JSON response');
       }
 
       const result = await response.json();
@@ -88,7 +126,7 @@ class BaseCrudServiceClass {
         totalCount: result.totalCount,
       };
     } catch (error) {
-      console.error(`Error fetching items from ${collectionId}:`, error);
+      console.error(`❌ Error fetching items from ${collectionId}:`, error);
       throw error;
     }
   }
@@ -124,14 +162,33 @@ class BaseCrudServiceClass {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || `Failed to fetch item ${itemId} from ${collectionId}`);
+        let errorMessage = `Failed to fetch item ${itemId} from ${collectionId}`;
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          } else {
+            const text = await response.text();
+            console.error('Non-JSON error response:', text);
+            errorMessage = `API error: ${response.status} ${response.statusText}`;
+          }
+        } catch (parseError) {
+          console.error('Failed to parse error response:', parseError);
+          errorMessage = `API error: ${response.status} ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('API returned non-JSON response');
       }
 
       const result = await response.json();
       return result.item || result;
     } catch (error) {
-      console.error(`Error fetching item ${itemId} from ${collectionId}:`, error);
+      console.error(`❌ Error fetching item ${itemId} from ${collectionId}:`, error);
       throw error;
     }
   }
@@ -154,14 +211,33 @@ class BaseCrudServiceClass {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || `Failed to update item ${_id} in ${collectionId}`);
+        let errorMessage = `Failed to update item ${_id} in ${collectionId}`;
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          } else {
+            const text = await response.text();
+            console.error('Non-JSON error response:', text);
+            errorMessage = `API error: ${response.status} ${response.statusText}`;
+          }
+        } catch (parseError) {
+          console.error('Failed to parse error response:', parseError);
+          errorMessage = `API error: ${response.status} ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('API returned non-JSON response');
       }
 
       const result = await response.json();
       return result.item || result;
     } catch (error) {
-      console.error(`Error updating item in ${collectionId}:`, error);
+      console.error(`❌ Error updating item in ${collectionId}:`, error);
       throw error;
     }
   }
@@ -181,11 +257,25 @@ class BaseCrudServiceClass {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || `Failed to delete item ${itemId} from ${collectionId}`);
+        let errorMessage = `Failed to delete item ${itemId} from ${collectionId}`;
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json();
+            errorMessage = error.message || errorMessage;
+          } else {
+            const text = await response.text();
+            console.error('Non-JSON error response:', text);
+            errorMessage = `API error: ${response.status} ${response.statusText}`;
+          }
+        } catch (parseError) {
+          console.error('Failed to parse error response:', parseError);
+          errorMessage = `API error: ${response.status} ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
       }
     } catch (error) {
-      console.error(`Error deleting item ${itemId} from ${collectionId}:`, error);
+      console.error(`❌ Error deleting item ${itemId} from ${collectionId}:`, error);
       throw error;
     }
   }
