@@ -2,8 +2,7 @@ import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
-import { BaseCrudService } from '@/integrations';
-import { upsertWixContact } from '@/integrations';
+import { BaseCrudService, upsertWixContact } from '@/integrations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -20,6 +19,8 @@ export default function HomePage() {
   });
 
   const onSubmit = async (data: { email: string }) => {
+    console.log('📋 Form submission started:', { email: data.email, timestamp: new Date().toISOString() });
+    
     try {
       // Step 0: Check if email already exists
       console.log('🔍 Checking if email already exists...', { email: data.email });
@@ -30,7 +31,11 @@ export default function HomePage() {
       
       if (emailExists) {
         console.log('⚠️ Email already registered:', { email: data.email });
-        throw new Error('This email is already registered. Please use a different email.');
+        setError('email', {
+          type: 'manual',
+          message: 'This email is already registered. Please use a different email.',
+        });
+        return;
       }
       
       const subscriberId = crypto.randomUUID();
@@ -45,39 +50,36 @@ export default function HomePage() {
       });
       console.log('✅ Subscriber created successfully in database');
       
-      // Step 2: Create or update contact in Wix Contacts
+      // Step 2: Create or update contact in Wix Contacts (non-blocking)
       console.log('👤 Creating/updating contact in Wix Contacts...', { email: data.email });
-      try {
-        const contactResult = await upsertWixContact(data.email);
+      upsertWixContact(data.email).then((contactResult) => {
         console.log('✅ Contact successfully created/updated in Wix Contacts:', {
           contactId: contactResult?.id,
           email: data.email,
         });
-      } catch (contactError) {
+      }).catch((contactError) => {
         console.error('⚠️ Error creating contact in Wix Contacts:', {
           email: data.email,
           error: contactError instanceof Error ? contactError.message : String(contactError),
         });
-        // Continue even if contact creation fails - the subscriber is still in the database
-      }
+      });
       
-      // Step 3: Send email notification to notkareemanani@gmail.com
+      // Step 3: Send email notification to notkareemanani@gmail.com (non-blocking)
       console.log('📧 Sending email notification...');
-      try {
-        await fetch('/api/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            subscriberEmail: data.email,
-            recipientEmail: 'notkareemanani@gmail.com',
-          }),
-        });
+      fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          subscriberEmail: data.email,
+          recipientEmail: 'notkareemanani@gmail.com',
+        }),
+      }).then(() => {
         console.log('✅ Email notification sent');
-      } catch (emailError) {
+      }).catch((emailError) => {
         console.error('⚠️ Error sending email:', emailError);
-      }
+      });
       
       // Step 4: Play audio if available
       if (audioRef.current) {
@@ -88,22 +90,21 @@ export default function HomePage() {
       }
       
       // Step 5: Clear form and navigate to result page
+      console.log('✅ Subscription successful, navigating to result page...');
       reset();
-      // Navigate immediately after successful submission
       navigate('/result');
     } catch (err) {
       console.error('❌ Subscription error:', {
         error: err instanceof Error ? err.message : String(err),
         timestamp: new Date().toISOString(),
+        stack: err instanceof Error ? err.stack : 'No stack trace',
       });
       
-      // Set form error for duplicate email
-      if (err instanceof Error && err.message.includes('already registered')) {
-        setError('email', {
-          type: 'manual',
-          message: err.message,
-        });
-      }
+      // Set generic form error
+      setError('email', {
+        type: 'manual',
+        message: err instanceof Error ? err.message : 'An error occurred. Please try again.',
+      });
     }
   };
 
