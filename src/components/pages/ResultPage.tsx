@@ -1,14 +1,64 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 
+interface Particle {
+  id: number;
+  left: number;
+  delay: number;
+  duration: number;
+  size: number;
+  color: string;
+}
+
 export default function ResultPage() {
   const navigate = useNavigate();
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  useEffect(() => {
+    // Generate celebration particles
+    const newParticles: Particle[] = Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      delay: Math.random() * 0.5,
+      duration: 2 + Math.random() * 1,
+      size: 8 + Math.random() * 12,
+      color: ['#FFFFE0', '#98FB98', '#FFB6C1', '#87CEEB', '#FFD700'][Math.floor(Math.random() * 5)],
+    }));
+    setParticles(newParticles);
+  }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-pastel-yellow via-background to-pastel-green">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-pastel-yellow via-background to-pastel-green relative overflow-hidden">
+      {/* Celebration Particles */}
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="fixed pointer-events-none rounded-full"
+          style={{
+            left: `${particle.left}%`,
+            bottom: 0,
+            width: particle.size,
+            height: particle.size,
+            backgroundColor: particle.color,
+          }}
+          initial={{ y: 0, opacity: 1, scale: 1 }}
+          animate={{
+            y: -window.innerHeight - 100,
+            opacity: 0,
+            scale: 0,
+            rotate: 360,
+          }}
+          transition={{
+            duration: particle.duration,
+            delay: particle.delay,
+            ease: 'easeOut',
+          }}
+        />
+      ))}
       <Header />
       
       <motion.main 
