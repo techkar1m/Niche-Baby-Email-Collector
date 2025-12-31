@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
-import { upsertWixContact } from '@/integrations/contacts';
+import { upsertWixContact } from '@/integrations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -89,9 +89,8 @@ export default function HomePage() {
       
       // Step 5: Clear form and navigate to result page
       reset();
-      setTimeout(() => {
-        navigate('/result');
-      }, 500);
+      // Navigate immediately after successful submission
+      navigate('/result');
     } catch (err) {
       console.error('❌ Subscription error:', {
         error: err instanceof Error ? err.message : String(err),
