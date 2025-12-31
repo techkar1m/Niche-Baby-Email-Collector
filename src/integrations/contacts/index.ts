@@ -1,1 +1,1 @@
-export * from './service';
+export { createWixContact, getWixContact, updateWixContact, upsertWixContact } from './service';
