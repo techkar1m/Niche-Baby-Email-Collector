@@ -2,18 +2,50 @@ import type { APIRoute } from 'astro';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { subscriberEmail, recipientEmail } = await request.json();
-
-    // Validate inputs
-    if (!subscriberEmail || !recipientEmail) {
+    // Validate request method
+    if (request.method !== 'POST') {
       return new Response(
-        JSON.stringify({ error: 'Missing required fields' }),
+        JSON.stringify({ error: 'Method not allowed' }),
+        { status: 405, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Parse request body with error handling
+    let body;
+    try {
+      body = await request.json();
+    } catch (parseError) {
+      console.error('❌ Failed to parse request body:', parseError);
+      return new Response(
+        JSON.stringify({ error: 'Invalid JSON in request body' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    console.log('Subscriber notification prepared:', {
-      email: subscriberEmail,
+    const { subscriberEmail, recipientEmail } = body;
+
+    // Validate inputs
+    if (!subscriberEmail || !recipientEmail) {
+      console.warn('⚠️ Missing required fields:', { subscriberEmail: !!subscriberEmail, recipientEmail: !!recipientEmail });
+      return new Response(
+        JSON.stringify({ error: 'Missing required fields: subscriberEmail and recipientEmail' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate email formats
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(subscriberEmail) || !emailRegex.test(recipientEmail)) {
+      console.warn('⚠️ Invalid email format:', { subscriberEmail, recipientEmail });
+      return new Response(
+        JSON.stringify({ error: 'Invalid email format' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    console.log('📧 Email notification request received:', {
+      subscriberEmail,
+      recipientEmail,
       timestamp: new Date().toISOString(),
     });
 
@@ -53,21 +85,50 @@ This is an automated notification from Niche Baby.
       `,
     };
 
-    console.log('Email notification prepared:', emailNotification);
+    console.log('✅ Email notification prepared successfully:', {
+      to: recipientEmail,
+      subject: emailNotification.subject,
+      timestamp: new Date().toISOString(),
+    });
 
+    // Return success response with proper JSON headers
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: 'Subscriber notification prepared',
+        message: 'Email notification prepared successfully',
         subscriberEmail: subscriberEmail,
+        recipientEmail: recipientEmail,
+        timestamp: new Date().toISOString(),
       }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+      { 
+        status: 200, 
+        headers: { 
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+        } 
+      }
     );
   } catch (error) {
-    console.error('Email API error:', error);
+    // Ensure we always return JSON, never HTML
+    console.error('❌ Email API error:', {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      timestamp: new Date().toISOString(),
+    });
+
     return new Response(
-      JSON.stringify({ error: 'Internal server error', details: String(error) }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
+      JSON.stringify({ 
+        error: 'Internal server error',
+        message: error instanceof Error ? error.message : 'Unknown error occurred',
+        timestamp: new Date().toISOString(),
+      }),
+      { 
+        status: 500, 
+        headers: { 
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+        } 
+      }
     );
   }
 };

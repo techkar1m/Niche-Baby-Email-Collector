@@ -2,8 +2,7 @@ import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
-import { BaseCrudService } from '@/integrations';
-import { upsertWixContact } from '@/integrations/contacts';
+import { BaseCrudService, upsertWixContact } from '@/integrations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -76,10 +75,24 @@ export default function HomePage() {
           subscriberEmail: data.email,
           recipientEmail: 'notkareemanani@gmail.com',
         }),
-      }).then(() => {
-        console.log('✅ Email notification sent');
+      }).then((response) => {
+        if (!response.ok) {
+          console.error('⚠️ Email API returned error status:', {
+            status: response.status,
+            statusText: response.statusText,
+          });
+          return response.json().then((data) => {
+            console.error('⚠️ Email API error details:', data);
+          });
+        }
+        return response.json();
+      }).then((data) => {
+        console.log('✅ Email notification sent successfully:', data);
       }).catch((emailError) => {
-        console.error('⚠️ Error sending email:', emailError);
+        console.error('⚠️ Error sending email:', {
+          error: emailError instanceof Error ? emailError.message : String(emailError),
+          timestamp: new Date().toISOString(),
+        });
       });
       
       // Step 4: Play audio if available
