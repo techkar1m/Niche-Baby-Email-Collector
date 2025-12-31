@@ -1,6 +1,13 @@
 // Note: @wix/contacts module is not available in the current environment
 // This is a stub implementation that logs contact creation attempts
 
+export interface WixContact {
+  id: string;
+  primaryEmail: string;
+  firstName?: string;
+  lastName?: string;
+}
+
 /**
  * Creates a new contact in Wix Contacts
  * @param email - The contact's email address (required)
@@ -8,7 +15,7 @@
  * @param lastName - The contact's last name (optional)
  * @returns The created contact object
  */
-export async function createWixContact(email: string, firstName?: string, lastName?: string) {
+export async function createWixContact(email: string, firstName?: string, lastName?: string): Promise<WixContact> {
   try {
     // Build contact data object
     const contactData: any = {
@@ -57,7 +64,7 @@ export async function createWixContact(email: string, firstName?: string, lastNa
  * @param email - The contact's email address to search for
  * @returns The contact object if found, null otherwise
  */
-export async function getWixContact(email: string) {
+export async function getWixContact(email: string): Promise<WixContact | null> {
   try {
     // Log query attempt (stub implementation)
     console.log('🔍 Wix Contact query attempted (stub):', {
@@ -84,7 +91,7 @@ export async function getWixContact(email: string) {
  * @param updates - The fields to update
  * @returns The updated contact object
  */
-export async function updateWixContact(contactId: string, updates: any) {
+export async function updateWixContact(contactId: string, updates: any): Promise<WixContact> {
   try {
     // Log update attempt (stub implementation)
     console.log('📝 Wix Contact update attempted (stub):', {
@@ -118,7 +125,7 @@ export async function updateWixContact(contactId: string, updates: any) {
  * @param lastName - The contact's last name (optional)
  * @returns The created or updated contact object
  */
-export async function upsertWixContact(email: string, firstName?: string, lastName?: string) {
+export async function upsertWixContact(email: string, firstName?: string, lastName?: string): Promise<WixContact> {
   try {
     // First, check if contact already exists
     const existingContact = await getWixContact(email);
