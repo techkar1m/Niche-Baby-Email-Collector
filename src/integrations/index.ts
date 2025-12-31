@@ -1,3 +1,2 @@
-export * from './contacts';
-export * from './cms';
-export { upsertWixContact } from './contacts';
+export { createWixContact, getWixContact, updateWixContact, upsertWixContact } from './contacts';
+export { BaseCrudService } from './cms';
