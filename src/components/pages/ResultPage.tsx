@@ -1,73 +1,14 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 
-interface Particle {
-  id: string;
-  left: number;
-  delay: number;
-  duration: number;
-  size: number;
-  color: string;
-}
-
 export default function ResultPage() {
   const navigate = useNavigate();
-  const [particles, setParticles] = useState<Particle[]>([]);
-
-  useEffect(() => {
-    // Generate celebration particles
-    const generateParticles = () => {
-      const newParticles: Particle[] = Array.from({ length: 30 }, (_, i) => ({
-        id: `particle-${Date.now()}-${i}`,
-        left: Math.random() * 100,
-        delay: Math.random() * 0.5,
-        duration: 2 + Math.random() * 1,
-        size: 8 + Math.random() * 12,
-        color: ['#FFFFE0', '#98FB98', '#FFB6C1', '#87CEEB', '#FFD700'][Math.floor(Math.random() * 5)],
-      }));
-      setParticles(newParticles);
-    };
-
-    generateParticles();
-    
-    // Regenerate particles every 3.5 seconds to create continuous loop
-    const interval = setInterval(generateParticles, 3500);
-    
-    return () => clearInterval(interval);
-  }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-pastel-yellow via-background to-pastel-green relative overflow-hidden">
-      {/* Celebration Particles */}
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="fixed pointer-events-none rounded-full"
-          style={{
-            left: `${particle.left}%`,
-            bottom: 0,
-            width: particle.size,
-            height: particle.size,
-            backgroundColor: particle.color,
-          }}
-          initial={{ y: 0, opacity: 1, scale: 1 }}
-          animate={{
-            y: -window.innerHeight - 100,
-            opacity: 0,
-            scale: 0,
-            rotate: 360,
-          }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            ease: 'easeOut',
-          }}
-        />
-      ))}
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-pastel-yellow via-background to-pastel-green">
       <Header />
       
       <motion.main 
@@ -82,7 +23,7 @@ export default function ResultPage() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0, transition: { delay: 0.2, duration: 0.6 } }}
           >
-            Happy NEW year
+            Here's Your<br />Niche Baby!
           </motion.h1>
           
           {/* Square Video with Thick Border */}
