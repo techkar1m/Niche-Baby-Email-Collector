@@ -1,19 +1,18 @@
-# Wixstro - Wix Astro Template
+# 👶 Niche Baby - Astro MPA
 
-A modern, full-featured Wix Astro template built with React, TypeScript, and Tailwind CSS. This template provides a solid foundation for building dynamic, interactive websites with Wix's powerful ecosystem.
+A modern, full featured Multi Page Application (MPA) built with React, TypeScript, and Tailwind CSS. This project serves as a high-conversion email collector for market intelligence, leveraging an AI assisted architecture and viral meme aesthetics.
 
 ## 🚀 Features
 
-- **Astro Framework** - Modern static site generator with server-side rendering
+- **Astro Framework** - Modern static site generator with server side rendering for optimal performance
 - **React Integration** - Full React support with JSX components
 - **TypeScript** - Type-safe development experience
 - **Tailwind CSS** - Utility-first CSS framework with custom components
-- **Wix Integration** - Seamless integration with Wix services and APIs
+- **AI-Enhanced** - Architecture and logic optimized via AI generation
 - **Modern UI Components** - Radix UI components with custom styling
 - **Authentication** - Built-in member authentication and protected routes
-- **CMS Integration** - Content management system integration
 - **Client-side Routing** - React Router for seamless navigation
-- **Responsive Design** - Mobile-first responsive design
+- **Responsive Design** - Mobile first responsive design
 - **Testing** - Vitest testing framework setup
 - **Development Tools** - ESLint, TypeScript checking, and more
 
@@ -30,37 +29,31 @@ A modern, full-featured Wix Astro template built with React, TypeScript, and Tai
 - **Build Tool**: Vite
 - **Deployment**: Cloudflare
 
-
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 - Node.js (version 18 or higher)
 - npm or yarn package manager
-- Wix account and site
 
 ### Installation
 
 1. **Install dependencies**:
    ```bash
-   npm run install-template
-   ```
+   npm install
+Set up environment variables:
 
-2. **Set up environment variables**:
-   ```bash
-   npm run env
-   ```
+Bash
 
-3. **Start development server**:
-   ```bash
-   npm run dev
-   ```
+npm run env
+Start development server:
 
-The development server will start and you can view your site at `http://localhost:4321`.
+Bash
 
-## 📁 Project Structure
+npm run dev
+The development server will start and you can view your site at http://localhost:4321.
 
-```
+📁 Project Structure
 main/
 ├── src/
 │   ├── components/          # React components
@@ -71,77 +64,61 @@ main/
 │   ├── lib/                # Utility functions
 │   ├── pages/              # Astro pages
 │   └── styles/             # Global styles
-├── integrations/           # Wix integrations
-│   ├── cms/               # CMS integration
-│   └── members/           # Member authentication
-├── public/                # Static assets
-└── eslint-rules/          # Custom ESLint rules
-```
+├── integrations/           # External API integrations
+│   ├── cms/                # CMS integration
+│   └── members/            # Member authentication
+├── public/                 # Static assets
+└── eslint-rules/           # Custom ESLint rules
+🎨 UI Components
+This project includes a comprehensive set of UI components built with Radix UI and styled with Tailwind CSS:
 
-## 🎨 UI Components
+Layout: Accordion, Collapsible, Tabs, Sheet
 
-This template includes a comprehensive set of UI components built with Radix UI and styled with Tailwind CSS:
+Forms: Input, Select, Checkbox, Radio Group, Switch
 
-- **Layout**: Accordion, Collapsible, Tabs, Sheet
-- **Forms**: Input, Select, Checkbox, Radio Group, Switch
-- **Navigation**: Navigation Menu, Menubar, Breadcrumb
-- **Feedback**: Alert, Toast, Progress, Skeleton
-- **Overlays**: Dialog, Popover, Tooltip, Hover Card
-- **Data Display**: Table, Card, Badge, Avatar
-- **Interactive**: Button, Toggle, Slider, Command
+Navigation: Navigation Menu, Menubar, Breadcrumb
 
-## 🔧 Available Scripts
+Feedback: Alert, Toast, Progress, Skeleton
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run release` - Release to Wix
-- `npm run env` - Pull environment variables
-- `npm run check` - Type check with Astro
-- `npm run test:run` - Run tests
-- `npm run install-template` - Install dependencies
+Overlays: Dialog, Popover, Tooltip, Hover Card
 
-## 🧪 Testing
+Data Display: Table, Card, Badge, Avatar
 
+Interactive: Button, Toggle, Slider, Command
+
+🔧 Available Scripts
+npm run dev - Start development server
+
+npm run build - Build for production
+
+npm run preview - Preview production build
+
+npm run env - Pull environment variables
+
+npm run check - Type check with Astro
+
+npm run test:run - Run tests
+
+🧪 Testing
 The project includes Vitest for testing:
 
-```bash
+Bash
+
 npm run test:run
-```
+📱 Responsive Design
+The template is built with a mobile first approach and includes:
 
-## 📱 Responsive Design
+Responsive breakpoints
 
-The template is built with a mobile-first approach and includes:
+Touch-friendly interactions
 
-- Responsive breakpoints
-- Touch-friendly interactions
-- Optimized images
-- Flexible layouts
+Optimized images
 
-## 🚀 Deployment
+Flexible layouts
 
-The template is configured for deployment on Cloudflare:
+🚀 Deployment
+The project is configured for deployment on Cloudflare:
 
-```bash
+Bash
+
 npm run build
-```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and linting
-5. Submit a pull request
-
-## 🆘 Support
-
-For support and questions:
-
-- Check the [Wix Developer Documentation](https://dev.wix.com/)
-- Review the [Astro Documentation](https://docs.astro.build/)
-
-
----
-
-Built with ❤️ using Wix Vibe, Astro, and modern web technologies.
