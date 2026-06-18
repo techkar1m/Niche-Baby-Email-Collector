@@ -51,7 +51,7 @@ Start development server:
 Bash
 
 npm run dev
-The development server will start and you can view your site at http://localhost:4321.
+The development server will start and you can view your site at nichebabyworld.com.
 
 📁 Project Structure
 main/
